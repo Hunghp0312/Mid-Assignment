@@ -1,20 +1,65 @@
 import React from "react";
 import { useState } from "react";
-import { Link } from "react-router-dom";
-import { Eye, EyeOff, Lock, Mail } from "lucide-react";
-
+import { Link, useNavigate } from "react-router-dom";
+import { Lock, Mail } from "lucide-react";
+import InputCustom from "../../components/InputCustom";
+import InputCheckbox from "../../components/InputCheckbox";
+import { login } from "../../services/authService";
+import { useAuthContext } from "../../contexts/authContext";
+import { jwtDecode } from "jwt-decode";
+import LoadingPage from "../../components/Loading";
+interface FormData {
+  username: string;
+  password: string;
+  rememberMe: boolean;
+}
 export default function LoginPage() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [showPassword, setShowPassword] = useState(false);
-  const [rememberMe, setRememberMe] = useState(false);
-
-  const handleSubmit = (e: React.FormEvent) => {
+  const { setAuthenticated } = useAuthContext();
+  const [formData, setFormData] = useState<FormData>({
+    username: "",
+    password: "",
+    rememberMe: false,
+  });
+  const [isLoading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState<boolean>(false);
+  const navigate = useNavigate();
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    try {
+      setLoading(true);
+      const data = await login(formData.username, formData.password);
+      localStorage.setItem("accessToken", data.accessToken);
+      setAuthenticated(true);
+      const decodedData = jwtDecode(data.accessToken);
+      setLoading(false);
+      if ((decodedData as { role: string })["role"] === "Admin") {
+        navigate("/admin");
+      } else {
+        navigate("/user");
+      }
+    } catch (error) {
+      console.error("Login error:", error);
+    }
     // Handle login logic here
-    console.log({ email, password, rememberMe });
+    console.log({ formData });
   };
 
+  function handleChange(
+    event: React.ChangeEvent<
+      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+    >
+  ): void {
+    const { name, value, type, checked } = event.target;
+    const fieldValue = type === "checkbox" ? checked : value;
+    setFormData({
+      ...formData,
+      [name]: fieldValue,
+    });
+  }
+  if (isLoading) {
+    return <LoadingPage></LoadingPage>;
+  }
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-950 p-4">
       <div className="w-full max-w-md">
@@ -30,83 +75,36 @@ export default function LoginPage() {
         <div className="bg-gray-900 rounded-lg shadow-xl p-8">
           <form onSubmit={handleSubmit} className="space-y-6">
             {/* Email Field */}
-            <div className="space-y-2">
-              <label
-                htmlFor="email"
-                className="text-sm font-medium text-gray-300 block"
-              >
-                Email
-              </label>
-              <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <Mail className="h-5 w-5 text-gray-500" />
-                </div>
-                <input
-                  id="email"
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  className="bg-gray-800 text-gray-100 sm:text-sm rounded-lg block w-full pl-10 p-2.5 border border-gray-700 focus:ring-gray-700 focus:border-gray-700"
-                  placeholder="name@example.com"
-                  required
-                />
-              </div>
-            </div>
+            <InputCustom
+              icon={<Mail className="h-5 w-5 text-gray-500" />}
+              label="Username"
+              name="username"
+              type="text"
+              value={formData.username}
+              onChange={handleChange}
+              errorMessage="Invalid email address"
+            ></InputCustom>
 
             {/* Password Field */}
-            <div className="space-y-2">
-              <label
-                htmlFor="password"
-                className="text-sm font-medium text-gray-300 block"
-              >
-                Password
-              </label>
-              <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <Lock className="h-5 w-5 text-gray-500" />
-                </div>
-                <input
-                  id="password"
-                  type={showPassword ? "text" : "password"}
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  className="bg-gray-800 text-gray-100 sm:text-sm rounded-lg block w-full pl-10 p-2.5 border border-gray-700 focus:ring-gray-700 focus:border-gray-700"
-                  placeholder="••••••••"
-                  required
-                />
-                <div className="absolute inset-y-0 right-0 pr-3 flex items-center">
-                  <button
-                    type="button"
-                    onClick={() => setShowPassword(!showPassword)}
-                    className="text-gray-500 hover:text-gray-300 focus:outline-none"
-                  >
-                    {showPassword ? (
-                      <EyeOff className="h-5 w-5" />
-                    ) : (
-                      <Eye className="h-5 w-5" />
-                    )}
-                  </button>
-                </div>
-              </div>
-            </div>
+            <InputCustom
+              icon={<Lock className="h-5 w-5 text-gray-500" />}
+              label="Password"
+              name="password"
+              type={showPassword ? "text" : "password"}
+              value={formData.password}
+              onChange={handleChange}
+              showPassword={showPassword}
+              setShowPassword={setShowPassword}
+            />
 
             {/* Remember Me & Forgot Password */}
             <div className="flex items-center justify-between">
-              <div className="flex items-center">
-                <input
-                  id="remember-me"
-                  type="checkbox"
-                  checked={rememberMe}
-                  onChange={(e) => setRememberMe(e.target.checked)}
-                  className="h-4 w-4 bg-gray-800 border-gray-700 rounded focus:ring-offset-gray-900 focus:ring-gray-700"
-                />
-                <label
-                  htmlFor="remember-me"
-                  className="ml-2 text-sm text-gray-300"
-                >
-                  Remember me
-                </label>
-              </div>
+              <InputCheckbox
+                label="Remember me"
+                name="rememberMe"
+                onChange={handleChange}
+                checked={formData.rememberMe}
+              ></InputCheckbox>
               <Link
                 to="/forgot-password"
                 className="text-sm text-gray-400 hover:text-gray-200"
@@ -134,7 +132,7 @@ export default function LoginPage() {
               </Link>
             </div>
           </form>
-
+          {JSON.stringify(formData)}
           {/* Divider */}
           {/* <div className="flex items-center my-6">
             <div className="flex-grow border-t border-gray-700"></div>
