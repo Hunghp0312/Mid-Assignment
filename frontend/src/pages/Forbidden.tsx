@@ -2,8 +2,10 @@ import { useAuthContext } from "../contexts/authContext";
 
 const Forbidden = () => {
   const { decodedToken } = useAuthContext();
+  const roleString =
+    "http://schemas.microsoft.com/ws/2008/06/identity/claims/role";
   const homePage =
-    (decodedToken as { role: string })["role"] === "SuperUser"
+    (decodedToken as { [roleString]: string })[roleString] === "SuperUser"
       ? "/admin"
       : "/user";
   return (

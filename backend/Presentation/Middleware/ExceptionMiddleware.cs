@@ -1,4 +1,5 @@
 ﻿using BLL.CustomException;
+using Microsoft.IdentityModel.Tokens;
 using System.Text.Json;
 
 namespace Presentation.Middleware;
@@ -31,7 +32,10 @@ public class ExceptionMiddleware
     {
         var statusCode = ex switch
         {
-            NotFoundException => StatusCodes.Status404NotFound,
+            NotFoundException => StatusCodes.Status400BadRequest,
+            BadRequestException => StatusCodes.Status400BadRequest,
+            ConflictException => StatusCodes.Status400BadRequest,
+            SecurityTokenException => StatusCodes.Status401Unauthorized,
             _ => StatusCodes.Status500InternalServerError
         };
 

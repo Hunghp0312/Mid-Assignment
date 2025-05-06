@@ -20,7 +20,7 @@ public class BookBorrowingRequestController : ControllerBase
     [Authorize(Roles = "User")]
     public async Task<IActionResult> AddBookBorrowingRequest([FromBody] BookBorrowingRequestRequestDTO bookBorrowing)
     {
-        var requestorId = Guid.Parse(User.FindFirst("id")?.Value ?? throw new NotFoundException("User not found"));
+        var requestorId = Guid.Parse(User.FindFirst("id")?.Value) ;
         await _bookBorrowingRequestService.AddBookBorrowingRequest(bookBorrowing, requestorId);
         return Ok();
     }
@@ -29,7 +29,7 @@ public class BookBorrowingRequestController : ControllerBase
     [Authorize(Roles = "SuperUser")]
     public async Task<IActionResult> ApproveBookBorrowingRequest(Guid id)
     {
-        var approverId = Guid.Parse(User.FindFirst("id")?.Value ?? throw new NotFoundException("User not found"));
+        var approverId = Guid.Parse(User.FindFirst("id")?.Value);
         await _bookBorrowingRequestService.ApproveBookBorrowingRequest(approverId, id);
         return Ok();
     }
@@ -38,7 +38,7 @@ public class BookBorrowingRequestController : ControllerBase
     [Authorize(Roles = "SuperUser")]
     public async Task<IActionResult> RejectBookBorrowingRequest(Guid id)
     {
-        var approverId = Guid.Parse(User.FindFirst("id")?.Value ?? throw new NotFoundException("User not found"));
+        var approverId = Guid.Parse(User.FindFirst("id")?.Value) ;
         await _bookBorrowingRequestService.RejectBookBorrowingRequest(approverId, id);
         return Ok();
     }

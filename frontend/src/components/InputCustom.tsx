@@ -82,7 +82,6 @@ const InputCustom: React.FC<InputProps> = ({
               : "border-gray-700 focus:ring-gray-700 focus:border-gray-700"
           } ${inputPadding} p-2.5 border`}
           placeholder={placeholder}
-          required
         />
         {type === "password" && (
           <div className="absolute inset-y-0 right-0 pr-3 flex items-center">

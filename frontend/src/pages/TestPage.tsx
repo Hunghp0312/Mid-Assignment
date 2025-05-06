@@ -1,4 +1,4 @@
-import LoadingOverlay from "../components/LoadingOverlay";
+import LoadingOverlay from "../components/loading/LoadingOverlay";
 
 const TestPage = () => {
   return (

@@ -47,4 +47,23 @@ public class BookBorrowingRequestRepository : Repository<BookBorrowingRequest>, 
             .ToListAsync();
         return (bookBorrowingRequests, totalCount);
     }
+    public async Task<(IEnumerable<BookBorrowingRequest>, int)> GetAllBookBorrowingRequestByUser(Guid userId, string? status, int pageIndex, int pageSize)
+    {
+        var query = _dbSet.AsQueryable();
+        if (Enum.TryParse<BookBorrowingRequestStatus>(status, ignoreCase: true, out var statusEnum))
+        {
+            query = query.Where(r => r.Status == statusEnum);
+        }
+        query = query.Where(r => r.RequestorId == userId);
+        var totalCount = await query.CountAsync();
+        var bookBorrowingRequests = await query
+            .Include(r => r.Requestor)
+            .Include(r => r.Approver)
+            .Include(r => r.BookBorrowingRequestDetails)
+            .ThenInclude(d => d.Book)
+            .Skip((pageIndex - 1) * pageSize)
+            .Take(pageSize)
+            .ToListAsync();
+        return (bookBorrowingRequests, totalCount);
+    }
 }

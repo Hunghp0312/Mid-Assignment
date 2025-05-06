@@ -20,4 +20,7 @@ public class User
     public List<BookBorrowingRequest> ApproverBookBorrowingRequests { get; set; } = [];
 
     public List<BookRating> Ratings { get; set; } = [];
+
+    public string? RefreshToken { get; set; }
+    public DateTime RefreshTokenExpiryTime { get; set; }
 }

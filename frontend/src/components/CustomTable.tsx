@@ -2,7 +2,7 @@
 import React from "react";
 import { Check } from "lucide-react";
 import TableFooter from "./TableFooter";
-import SkeletonRow from "./SkeletonRow";
+import SkeletonRow from "./loading/SkeletonRow";
 
 export type DataAction<T> = {
   label?: string;
@@ -109,28 +109,12 @@ const DataTable = <T extends Record<string, any>>({
     setSelectedRows(updatedSelection);
   };
 
-  // Handle "select all" checkbox
-  const toggleSelectAll = () => {
-    if (selectedRows.length === data.length) {
-      setSelectedRows([]);
-    } else {
-      setSelectedRows([...data]);
-    }
-  };
-
   // Check if a row is selected
   const isRowSelected = (row: T) => {
     return selectedRows.some(
       (selectedRow) => selectedRow[keyField] === row[keyField]
     );
   };
-
-  // // Notify parent component when selection changes
-  // useEffect(() => {
-  //   if (onSelectionChange) {
-  //     onSelectionChange(selectedRows);
-  //   }
-  // }, [selectedRows, onSelectionChange]);
 
   // Render cell content
   const renderCell = (row: T, column: DataColumn<T>) => {
@@ -231,25 +215,7 @@ const DataTable = <T extends Record<string, any>>({
           <thead>
             <tr className="border-b border-gray-800">
               {/* Checkbox column header */}
-              {selectable && (
-                <th className="py-3 px-4 text-sm font-medium text-gray-300 text-left w-10">
-                  <div className="flex items-center justify-center">
-                    <div
-                      onClick={toggleSelectAll}
-                      className={`h-4 w-4 rounded border cursor-pointer flex items-center justify-center ${
-                        selectedRows.length === data.length && data.length > 0
-                          ? "bg-gray-600 border-gray-500"
-                          : "border-gray-600 hover:border-gray-500"
-                      }`}
-                    >
-                      {selectedRows.length === data.length &&
-                        data.length > 0 && (
-                          <Check className="h-3 w-3 text-white" />
-                        )}
-                    </div>
-                  </div>
-                </th>
-              )}
+              {selectable && <th></th>}
 
               {/* Column headers */}
               {tableColumns.map((column, index) => (

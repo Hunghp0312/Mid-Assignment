@@ -7,7 +7,7 @@ import React, {
 } from "react";
 import { jwtDecode } from "jwt-decode";
 import { getUserById } from "../services/userService";
-import LoadingPage from "../components/Loading";
+import LoadingPage from "../components/loading/Loading";
 
 interface AuthContextType {
   isAuthenticated: boolean;
@@ -17,7 +17,7 @@ interface AuthContextType {
 }
 interface DecodedTokenType {
   id: string;
-  role: string;
+  "http://schemas.microsoft.com/ws/2008/06/identity/claims/role": string;
   exp: number;
   iat: number;
 }

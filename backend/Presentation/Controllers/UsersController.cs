@@ -19,4 +19,11 @@ public class UsersController : ControllerBase
         var user = await _userService.GetUserByIdAsync(id);
         return Ok(user);
     }
+    [HttpGet("{id}/book-borrowing-requests")]
+    public async Task<IActionResult> GetAllBookBorrowingRequestByUser(Guid id, [FromQuery] string? status, [FromQuery] int pageIndex = 1, [FromQuery] int pageSize = 5)
+    {
+        var userBookBorrowing = await _userService.GetAllBookBorrowingRequestByUser(id, status, pageIndex, pageSize);
+
+        return Ok(userBookBorrowing);
+    }
 }

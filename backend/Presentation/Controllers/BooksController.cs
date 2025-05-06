@@ -8,6 +8,7 @@ namespace Presentation.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
+[Authorize]
 public class BooksController : ControllerBase
 {
     private readonly IBookService _bookService;
@@ -38,6 +39,7 @@ public class BooksController : ControllerBase
     }
 
     [HttpPost]
+    [Authorize(Roles = "SuperUser")]
     public async Task<IActionResult> AddBook([FromForm] BookCreateDTO book)
     {
         var newBook = await _bookService.AddAsync(book);
@@ -45,6 +47,7 @@ public class BooksController : ControllerBase
     }
 
     [HttpPut("{id}")]
+    [Authorize(Roles = "SuperUser")]
     public async Task<IActionResult> UpdateBook(Guid id, [FromForm] BookUpdateDTO book)
     {
         var updatedBook = await _bookService.Update(id, book);
@@ -52,6 +55,7 @@ public class BooksController : ControllerBase
     }
 
     [HttpDelete("{id}")]
+    [Authorize(Roles = "SuperUser")]
     public async Task<IActionResult> DeleteBook(Guid id)
     {
         await _bookService.Remove(id);

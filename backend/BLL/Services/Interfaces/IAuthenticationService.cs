@@ -4,7 +4,9 @@ namespace BLL.Services.Interfaces;
 
 public interface IAuthenticateService 
 {
-    Task<LoginResponseDTO> LoginAsync(LoginRequestDTO loginRequest);
+    Task<TokenResponseDTO> LoginAsync(LoginRequestDTO loginRequest);
     Task RegisterAsync(RegisterRequestDTO registerRequest);
+    Task<TokenResponseDTO> RetrieveAccessToken(RefreshRequestDTO refreshTokenRequest);
+    Task LogoutAsync(string accessToken);
 
 }

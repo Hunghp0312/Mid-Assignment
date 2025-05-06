@@ -1,6 +1,7 @@
 import { ChevronLeft, ChevronRight, LogOut } from "lucide-react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import NavItem from "./NavItem";
+import { useAuthContext } from "../contexts/authContext";
 
 interface NavItemProps {
   icon: React.ReactNode;
@@ -18,6 +19,14 @@ export default function Navbar({
   navItems,
 }: NavbarProps) {
   const location = useLocation();
+  const navigate = useNavigate();
+  const { setAuthenticated } = useAuthContext();
+  const handleLogout = () => {
+    // Handle logout logic here
+    localStorage.removeItem("accessToken");
+    setAuthenticated(false);
+    navigate("/login");
+  };
 
   return (
     <aside
@@ -48,14 +57,21 @@ export default function Navbar({
           />
         ))}
       </nav>
-
       <div className="absolute bottom-0 w-full p-2 border-t border-gray-800">
-        <NavItem
-          icon={<LogOut size={20} />}
-          label="Logout"
-          href="/logout"
-          collapsed={collapsed}
-        />
+        <button
+          onClick={handleLogout}
+          className={`
+          flex items-center gap-2 px-3 py-2 rounded-md transition-colors
+
+              text-gray-300 hover:bg-gray-800 hover:text-white
+          ${collapsed ? "justify-center" : ""}
+        `}
+        >
+          <div>
+            <LogOut size={20} />
+          </div>
+          {!collapsed && <span>Logout</span>}
+        </button>
       </div>
     </aside>
   );

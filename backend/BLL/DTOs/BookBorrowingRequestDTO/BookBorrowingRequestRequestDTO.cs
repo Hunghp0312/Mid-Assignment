@@ -1,4 +1,6 @@
-﻿namespace BLL.DTOs.BookBorrowingRequestDTO;
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace BLL.DTOs.BookBorrowingRequestDTO;
 
 public class BookBorrowingRequestRequestDTO
 {

@@ -8,15 +8,21 @@ const ProtectedRoute = ({
   role: string;
   children: React.ReactNode;
 }) => {
+  const roleString =
+    "http://schemas.microsoft.com/ws/2008/06/identity/claims/role";
   const { isAuthenticated, decodedToken } = useAuthContext() as {
     isAuthenticated: boolean;
-    decodedToken: { role: string } | null;
+    decodedToken: {
+      [roleString]: string;
+    };
   };
-  console.log(decodedToken);
+  console.log(isAuthenticated);
   if (!isAuthenticated) {
     return <Navigate to="/login" />;
   }
-  if (decodedToken && decodedToken["role"] !== role) {
+  console.log(decodedToken[roleString], role);
+  if (decodedToken && decodedToken[roleString] !== role) {
+    console.log(decodedToken[roleString]);
     return <Navigate to="/forbidden" />;
   }
   return children;

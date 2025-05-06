@@ -6,4 +6,5 @@ public interface IBookBorrowingRequestRepository : IRepository<BookBorrowingRequ
 {
     Task<int> GetUserTotalRequestInMonth(Guid requestorId);
     Task<(IEnumerable<BookBorrowingRequest>, int)> GetAllWithPaginationAsync(string? status, int pageIndex, int pageSize);
+    Task<(IEnumerable<BookBorrowingRequest>, int)> GetAllBookBorrowingRequestByUser(Guid userId, string? status, int pageIndex, int pageSize);
 }

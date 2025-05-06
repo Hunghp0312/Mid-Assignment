@@ -28,14 +28,46 @@ axiosInstance.interceptors.response.use(
     // Handle successful response
     return response;
   },
-  (error) => {
+  async (error) => {
     console.log(error);
     // Handle response error
-    if (error.response.status === 401) {
-      // Handle unauthorized access, e.g., redirect to login page
-      console.error("Unauthorized access - redirecting to login");
-      navigate("/login");
-    } else if (error.response.status === 403) {
+    const originalRequest = error.config;
+    if (error.response.status === 401 && !originalRequest._retry) {
+      originalRequest._retry = true; // Mark the request as retried to avoid infinite loops.
+      try {
+        const refreshToken = localStorage.getItem("refreshToken"); // Retrieve the stored refresh token.
+        const accessToken = localStorage.getItem("accessToken"); // Retrieve the stored refresh token.os
+        // Make a request to your auth server to refresh the token.
+        const response = await axiosInstance.post("/auth/refresh-token", {
+          accessToken,
+          refreshToken,
+        });
+        const { accessToken: newAccessToken, refreshToken: newRefreshToken } =
+          response.data;
+        // Store the new access and refresh tokens.
+        localStorage.setItem("accessToken", newAccessToken);
+        localStorage.setItem("refreshToken", newRefreshToken);
+        console.log("New access token:", newRefreshToken);
+        // Update the authorization header with the new access token.
+        axiosInstance.defaults.headers.common[
+          "Authorization"
+        ] = `Bearer ${newAccessToken}`;
+        return axiosInstance(originalRequest); // Retry the original request with the new access token.
+      } catch (refreshError) {
+        // Handle refresh token errors by clearing stored tokens and redirecting to the login page.
+        console.error("Token refresh failed:", refreshError);
+        localStorage.removeItem("accessToken");
+        localStorage.removeItem("refreshToken");
+        navigate("/login");
+        return Promise.reject(refreshError);
+      }
+    }
+    // if (error.response.status === 401) {
+    //   // Handle unauthorized access, e.g., redirect to login page
+    //   console.error("Unauthorized access - redirecting to login");
+    //   navigate("/login");
+    // }
+    else if (error.response.status === 403) {
       // Handle unauthorized access, e.g., redirect to login page
       console.error("Permission Denied - redirecting to login");
     } else if (error.response.status === 404) {

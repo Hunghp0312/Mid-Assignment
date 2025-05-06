@@ -67,11 +67,30 @@
         }
       }
     },
-    "/api/Auth/show-claims": {
-      "get": {
+    "/api/Auth/refresh-token": {
+      "post": {
         "tags": [
           "Auth"
         ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RefreshRequestDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RefreshRequestDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/RefreshRequestDTO"
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
             "description": "OK"
@@ -260,30 +279,43 @@
               "schema": {
                 "required": [
                   "Author",
+                  "CategoryId",
                   "Description",
+                  "Quantity",
                   "Title"
                 ],
                 "type": "object",
                 "properties": {
                   "Title": {
+                    "maxLength": 200,
+                    "minLength": 0,
                     "type": "string"
                   },
                   "Author": {
+                    "maxLength": 100,
+                    "minLength": 0,
                     "type": "string"
                   },
                   "Description": {
+                    "maxLength": 1000,
+                    "minLength": 0,
                     "type": "string"
                   },
                   "Quantity": {
+                    "maximum": 2147483647,
+                    "minimum": 0,
                     "type": "integer",
                     "format": "int32"
                   },
                   "ISBN": {
+                    "maxLength": 13,
+                    "minLength": 10,
+                    "pattern": "^(97(8|9))?\\d{9}(\\d|X)$",
                     "type": "string"
                   },
                   "PublishedDate": {
                     "type": "string",
-                    "format": "date-time"
+                    "format": "date"
                   },
                   "CategoryId": {
                     "type": "string",
@@ -367,30 +399,43 @@
               "schema": {
                 "required": [
                   "Author",
+                  "CategoryId",
                   "Description",
+                  "Quantity",
                   "Title"
                 ],
                 "type": "object",
                 "properties": {
                   "Title": {
+                    "maxLength": 200,
+                    "minLength": 0,
                     "type": "string"
                   },
                   "Author": {
+                    "maxLength": 100,
+                    "minLength": 0,
                     "type": "string"
                   },
                   "Description": {
+                    "maxLength": 1000,
+                    "minLength": 0,
                     "type": "string"
                   },
                   "Quantity": {
+                    "maximum": 2147483647,
+                    "minimum": 0,
                     "type": "integer",
                     "format": "int32"
                   },
                   "ISBN": {
+                    "maxLength": 13,
+                    "minLength": 10,
+                    "pattern": "^(97(8|9))?\\d{9}(\\d|X)$",
                     "type": "string"
                   },
                   "PublishedDate": {
                     "type": "string",
-                    "format": "date-time"
+                    "format": "date"
                   },
                   "CategoryId": {
                     "type": "string",
@@ -617,6 +662,54 @@
           }
         }
       }
+    },
+    "/api/Users/{id}/book-borrowing-requests": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "pageIndex",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 1
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 5
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
     }
   },
   "components": {
@@ -643,12 +736,14 @@
         "type": "object",
         "properties": {
           "name": {
-            "type": "string",
-            "nullable": true
+            "maxLength": 50,
+            "minLength": 0,
+            "type": "string"
           },
           "description": {
-            "type": "string",
-            "nullable": true
+            "maxLength": 1000,
+            "minLength": 0,
+            "type": "string"
           }
         },
         "additionalProperties": false
@@ -661,18 +756,37 @@
         "type": "object",
         "properties": {
           "username": {
-            "type": "string",
-            "nullable": true
+            "minLength": 1,
+            "type": "string"
           },
           "password": {
-            "type": "string",
-            "nullable": true
+            "minLength": 1,
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "RefreshRequestDTO": {
+        "required": [
+          "accessToken",
+          "refreshToken"
+        ],
+        "type": "object",
+        "properties": {
+          "accessToken": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "refreshToken": {
+            "minLength": 1,
+            "type": "string"
           }
         },
         "additionalProperties": false
       },
       "RegisterRequestDTO": {
         "required": [
+          "email",
           "firstName",
           "lastName",
           "password",
@@ -681,20 +795,31 @@
         "type": "object",
         "properties": {
           "username": {
-            "type": "string",
-            "nullable": true
+            "maxLength": 100,
+            "minLength": 0,
+            "type": "string"
           },
           "password": {
+            "maxLength": 100,
+            "minLength": 6,
             "type": "string",
-            "nullable": true
+            "format": "password"
           },
           "firstName": {
+            "maxLength": 50,
+            "minLength": 0,
+            "type": "string"
+          },
+          "email": {
+            "maxLength": 100,
+            "minLength": 0,
             "type": "string",
-            "nullable": true
+            "format": "email"
           },
           "lastName": {
-            "type": "string",
-            "nullable": true
+            "maxLength": 50,
+            "minLength": 0,
+            "type": "string"
           }
         },
         "additionalProperties": false

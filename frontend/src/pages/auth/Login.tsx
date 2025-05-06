@@ -1,61 +1,104 @@
-import React from "react";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import React, { useEffect } from "react";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Lock, Mail } from "lucide-react";
+import { Lock, User } from "lucide-react";
 import InputCustom from "../../components/InputCustom";
-import InputCheckbox from "../../components/InputCheckbox";
 import { login } from "../../services/authService";
 import { useAuthContext } from "../../contexts/authContext";
 import { jwtDecode } from "jwt-decode";
-import LoadingPage from "../../components/Loading";
-interface FormData {
+import LoadingPage from "../../components/loading/Loading";
+import { toast } from "react-toastify";
+interface LoginRequest {
   username: string;
   password: string;
-  rememberMe: boolean;
 }
 export default function LoginPage() {
-  const { setAuthenticated } = useAuthContext();
-  const [formData, setFormData] = useState<FormData>({
+  const { setAuthenticated, isAuthenticated, decodedToken } = useAuthContext();
+  const [formData, setFormData] = useState<LoginRequest>({
     username: "",
     password: "",
-    rememberMe: false,
   });
   const [isLoading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState<boolean>(false);
+  const [errors, setErrors] = useState<Record<string, string>>({
+    username: "",
+    password: "",
+  });
   const navigate = useNavigate();
+  const validateForm = () => {
+    const newErrors: Record<string, string> = {};
+    if (!formData.username.trim()) {
+      newErrors.username = "Username is required";
+    }
+    if (!formData.password.trim()) {
+      newErrors.password = "Password is required";
+    }
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+  const roleString =
+    "http://schemas.microsoft.com/ws/2008/06/identity/claims/role";
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     try {
       setLoading(true);
+      if (!validateForm()) {
+        return;
+      }
       const data = await login(formData.username, formData.password);
       localStorage.setItem("accessToken", data.accessToken);
+      localStorage.setItem("refreshToken", data.refreshToken);
+
       setAuthenticated(true);
       const decodedData = jwtDecode(data.accessToken);
-      setLoading(false);
-      if ((decodedData as { role: string })["role"] === "Admin") {
+      if (
+        decodedData &&
+        (
+          decodedData as {
+            [roleString]: string;
+          }
+        )[roleString] === "SuperUser"
+      ) {
+        console.log("gethere");
         navigate("/admin");
       } else {
         navigate("/user");
       }
-    } catch (error) {
-      console.error("Login error:", error);
+    } catch (error: any) {
+      toast.error(error.response.data.error);
+    } finally {
+      setLoading(false);
     }
     // Handle login logic here
     console.log({ formData });
   };
-
+  useEffect(() => {
+    if (isAuthenticated) {
+      if (
+        (decodedToken as { [roleString]: string })[roleString] === "SuperUser"
+      ) {
+        navigate("/admin");
+      } else {
+        navigate("/user");
+      }
+    }
+  }, [isAuthenticated, decodedToken, navigate]);
   function handleChange(
     event: React.ChangeEvent<
       HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
     >
   ): void {
-    const { name, value, type, checked } = event.target;
-    const fieldValue = type === "checkbox" ? checked : value;
+    const { name, value } = event.target;
     setFormData({
       ...formData,
-      [name]: fieldValue,
+      [name]: value,
     });
+    // Clear error when field is edited
+    if (errors[name]) {
+      setErrors((prev) => ({ ...prev, [name]: "" }));
+    }
   }
   if (isLoading) {
     return <LoadingPage></LoadingPage>;
@@ -76,13 +119,13 @@ export default function LoginPage() {
           <form onSubmit={handleSubmit} className="space-y-6">
             {/* Email Field */}
             <InputCustom
-              icon={<Mail className="h-5 w-5 text-gray-500" />}
+              icon={<User className="h-5 w-5 text-gray-500" />}
               label="Username"
               name="username"
               type="text"
               value={formData.username}
               onChange={handleChange}
-              errorMessage="Invalid email address"
+              errorMessage={errors.username}
             ></InputCustom>
 
             {/* Password Field */}
@@ -95,23 +138,8 @@ export default function LoginPage() {
               onChange={handleChange}
               showPassword={showPassword}
               setShowPassword={setShowPassword}
+              errorMessage={errors.password}
             />
-
-            {/* Remember Me & Forgot Password */}
-            <div className="flex items-center justify-between">
-              <InputCheckbox
-                label="Remember me"
-                name="rememberMe"
-                onChange={handleChange}
-                checked={formData.rememberMe}
-              ></InputCheckbox>
-              <Link
-                to="/forgot-password"
-                className="text-sm text-gray-400 hover:text-gray-200"
-              >
-                Forgot password?
-              </Link>
-            </div>
 
             {/* Submit Button */}
             <button
@@ -133,22 +161,6 @@ export default function LoginPage() {
             </div>
           </form>
           {JSON.stringify(formData)}
-          {/* Divider */}
-          {/* <div className="flex items-center my-6">
-            <div className="flex-grow border-t border-gray-700"></div>
-            <span className="px-4 text-sm text-gray-500">Or continue with</span>
-            <div className="flex-grow border-t border-gray-700"></div>
-          </div> */}
-
-          {/* Social Login Buttons */}
-          {/* <div className="grid grid-cols-2 gap-4">
-            <button className="py-2.5 px-5 text-sm font-medium text-white bg-gray-800 rounded-lg border border-gray-700 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500">
-              Google
-            </button>
-            <button className="py-2.5 px-5 text-sm font-medium text-white bg-gray-800 rounded-lg border border-gray-700 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500">
-              GitHub
-            </button>
-          </div> */}
         </div>
       </div>
     </div>

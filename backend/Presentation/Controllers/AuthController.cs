@@ -1,6 +1,5 @@
 ﻿using BLL.DTOs.AuthenticateDTO;
 using BLL.Services.Interfaces;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Presentation.Controllers;
@@ -26,11 +25,10 @@ public class AuthController : ControllerBase
         await _authService.RegisterAsync(registerRequest);
         return Ok("User registered successfully.");
     }
-    [Authorize]
-    [HttpGet("show-claims")]
-    public IActionResult ShowClaims()
+    [HttpPost("refresh-token")]
+    public async Task<IActionResult> RefreshToken([FromBody] RefreshRequestDTO refreshTokenRequest)
     {
-        var claims = User.Claims.Select(c => new { c.Type, c.Value }).ToList();
-        return Ok(claims);
+        var token = await _authService.RetrieveAccessToken(refreshTokenRequest);
+        return Ok(token);
     }
 }

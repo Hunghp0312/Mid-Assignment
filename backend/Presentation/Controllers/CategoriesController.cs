@@ -7,6 +7,7 @@ namespace Presentation.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
+[Authorize]
 public class CategoriesController : ControllerBase
 {
     private readonly ICategoryService _categoryService;
@@ -38,6 +39,7 @@ public class CategoriesController : ControllerBase
     }
 
     [HttpPost]
+    [Authorize(Roles = "SuperUser")]
     public async Task<IActionResult> AddCategory([FromBody] CategoryRequestDTO category)
     {
         var newCategory = await _categoryService.AddAsync(category);
@@ -46,6 +48,7 @@ public class CategoriesController : ControllerBase
     }
 
     [HttpPut("{id}")]
+    [Authorize(Roles = "SuperUser")]
     public async Task<IActionResult> UpdateCategory(Guid id, [FromBody] CategoryRequestDTO category)
     {
         var updatedCategory = await _categoryService.UpdateAsync(id, category);
@@ -54,6 +57,7 @@ public class CategoriesController : ControllerBase
     }
 
     [HttpDelete("{id}")]
+    [Authorize(Roles = "SuperUser")]
     public async Task<IActionResult> DeleteCategory(Guid id)
     {
         await _categoryService.RemoveAsync(id);

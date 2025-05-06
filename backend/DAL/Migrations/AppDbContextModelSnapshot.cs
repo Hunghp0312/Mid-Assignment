@@ -190,6 +190,12 @@ namespace DAL.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("RefreshToken")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("RefreshTokenExpiryTime")
+                        .HasColumnType("datetime2");
+
                     b.Property<int>("Role")
                         .HasColumnType("int");
 
@@ -212,6 +218,7 @@ namespace DAL.Migrations
                             PasswordHash = "bCxEK/uLUZ7Z8+BYfdU/YdhbrVuhRvzYwReovdU2+04=",
                             PasswordSalt = "jQW5ssWVeAE85CJ9pzgeDQ==",
                             PhoneNumber = "1234567890",
+                            RefreshTokenExpiryTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Role = 1,
                             Username = "admin"
                         },
@@ -225,6 +232,7 @@ namespace DAL.Migrations
                             PasswordHash = "OCqOmH72mdBYjZf0amTxF3OWtbesV9Lv4Y1Typ4519w=",
                             PasswordSalt = "7gKSkgQhiq+RSmknIghQ4g==",
                             PhoneNumber = "0987654321",
+                            RefreshTokenExpiryTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Role = 0,
                             Username = "user1"
                         },
@@ -238,6 +246,7 @@ namespace DAL.Migrations
                             PasswordHash = "b9nX8oPNh4n1VLUcMFuBXaBBfok737Q1RkbphVrQu6g=",
                             PasswordSalt = "C+At2NY4wxdnriGqqg24iQ==",
                             PhoneNumber = "0123456789",
+                            RefreshTokenExpiryTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Role = 0,
                             Username = "user2"
                         });

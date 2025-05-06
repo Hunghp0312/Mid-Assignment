@@ -67,6 +67,7 @@ builder.Services.AddScoped<IAuthenticateService, AuthenticateService>();
 builder.Services.AddScoped<IBookBorrowingRequestService, BookBorrowingRequestService>();
 //builder.Services.AddScoped<IBookBorrowingRequestDetailService, BookBorrowingRequestDetailService>();
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<ITokenService, TokenService>();
 
 // Database Context
 builder.Services.AddDbContext<AppDbContext>(options =>

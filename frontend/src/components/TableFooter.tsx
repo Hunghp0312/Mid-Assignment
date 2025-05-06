@@ -6,6 +6,7 @@ interface TableFooterProps {
   pageSizeOptions?: number[];
   setPageSize: (size: number) => void;
   changePage: (index: number) => void;
+  className?: string;
 }
 const TableFooter: React.FC<TableFooterProps> = ({
   pageSize,
@@ -14,6 +15,7 @@ const TableFooter: React.FC<TableFooterProps> = ({
   setPageSize,
   changePage,
   pageSizeOptions = [5, 10, 25, 50, 100],
+  className = "",
 }) => {
   const totalPages = Math.ceil(totalItems / pageSize);
   const handlePageSizeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -21,7 +23,7 @@ const TableFooter: React.FC<TableFooterProps> = ({
     changePage(1);
   };
   return (
-    <div className="flex items-center justify-between px-2">
+    <div className={`flex items-center justify-between px-2 ${className}`}>
       <div className="flex items-center space-x-2 text-sm text-gray-400">
         <span>Rows per page:</span>
         <select

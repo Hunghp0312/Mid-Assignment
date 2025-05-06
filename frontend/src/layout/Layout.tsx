@@ -1,36 +1,32 @@
 import { useState } from "react";
 import Navbar from "./Navbar";
-import {
-  LayoutDashboard,
-  Users,
-  Settings,
-  HelpCircle,
-  Book,
-  Tags,
-  BookCopy,
-} from "lucide-react";
+import { Book, Tags, BookCopy, BookOpen } from "lucide-react";
 import { Outlet } from "react-router-dom";
 import { useAuthContext } from "../contexts/authContext";
+const roleString =
+  "http://schemas.microsoft.com/ws/2008/06/identity/claims/role";
 export default function Layout() {
   const [collapsed, setCollapsed] = useState(false);
   const { decodedToken } = useAuthContext() as {
-    decodedToken: { role: string } | null;
+    decodedToken: { [roleString]: string } | null;
   };
   const toggleSidebar = () => {
     setCollapsed(!collapsed);
   };
-  if (decodedToken && decodedToken["role"] === "Admin") {
+
+  if (decodedToken && decodedToken[roleString] === "SuperUser") {
     const navItems = [
-      { icon: <LayoutDashboard size={20} />, label: "Dashboard", href: "/" },
-      { icon: <Users size={20} />, label: "Users", href: "users" },
+      { icon: <Book size={20} />, label: "Books", href: "" },
       {
         icon: <Tags size={20} />,
         label: "Categories",
         href: "categories",
       },
-      { icon: <Book size={20} />, label: "Books", href: "books" },
-      { icon: <Settings size={20} />, label: "Settings", href: "/settings" },
-      { icon: <HelpCircle size={20} />, label: "Help", href: "/help" },
+      {
+        icon: <BookOpen size={20} />,
+        label: "Book-Borrowing",
+        href: "book-borrowing",
+      },
     ];
     return (
       <div className="flex min-h-screen bg-gray-950">
@@ -50,10 +46,12 @@ export default function Layout() {
     );
   }
   const navItems = [
-    { icon: <LayoutDashboard size={20} />, label: "Dashboard", href: "" },
-    { icon: <BookCopy size={20} />, label: "My Borrowings", href: "borrows" },
-    { icon: <Settings size={20} />, label: "Settings", href: "/settings" },
-    { icon: <HelpCircle size={20} />, label: "Help", href: "/help" },
+    { icon: <Book size={20} />, label: "Book", href: "" },
+    {
+      icon: <BookCopy size={20} />,
+      label: "My Borrowings",
+      href: "book-borrowing",
+    },
   ];
   return (
     <div className="flex min-h-screen bg-gray-950">

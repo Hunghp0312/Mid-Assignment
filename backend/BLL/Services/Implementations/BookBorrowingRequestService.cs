@@ -114,12 +114,14 @@ public class BookBorrowingRequestService : IBookBorrowingRequestService
         }
         bookBorrowingRequest.Status = BookBorrowingRequestStatus.Rejected;
         bookBorrowingRequest.ApproverId = approverId;
+
         await _bookBorrowingRequestRepository.SaveChangesAsync();
     }
     public async Task<IEnumerable<BookBorrowingRequestResponseDTO>> GetAllAsync()
     {
         var bookBorrowingRequests = await _bookBorrowingRequestRepository.GetAllAsync();
         var bookBorrowingRequestResponseDTOs = bookBorrowingRequests.Select(x => x.ToBookBorrowingRequestResponseDTO()).ToList();
+
         return bookBorrowingRequestResponseDTOs;
     }
     public async Task<PaginatedList<BookBorrowingRequestResponseDTO>> GetAllWithPaginationAsync(string? status, int pageIndex, int pageSize)
@@ -127,6 +129,7 @@ public class BookBorrowingRequestService : IBookBorrowingRequestService
         var (bookBorrowingRequests, count) = await _bookBorrowingRequestRepository.GetAllWithPaginationAsync(status, pageIndex, pageSize);
         var bookBorrowingRequestResponseDTOs = bookBorrowingRequests.Select(x => x.ToBookBorrowingRequestResponseDTO()).ToList();
         var paginatedBookBorrowingRequests = new PaginatedList<BookBorrowingRequestResponseDTO>(bookBorrowingRequestResponseDTOs, count, pageIndex, pageSize);
+
         return paginatedBookBorrowingRequests;
     }
 }

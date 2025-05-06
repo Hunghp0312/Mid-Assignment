@@ -12,3 +12,24 @@ export const login = async (username: string, password: string) => {
     throw error;
   }
 };
+export const register = async (
+  firstName: string,
+  lastName: string,
+  username: string,
+  email: string,
+  password: string
+) => {
+  try {
+    const response = await axiosInstance.post("/auth/register", {
+      firstName,
+      lastName,
+      username,
+      email,
+      password,
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Register error:", error);
+    throw error;
+  }
+};

@@ -6,6 +6,9 @@ import { BookFilterParam, getBookPagination } from "../../services/bookService";
 import { addBorrowing } from "../../services/bookBorrowingService";
 import InputCustom from "../../components/InputCustom";
 import { getCategories } from "../../services/categoryService";
+import { handleAxiosError } from "../../utils/handleError";
+import { toast } from "react-toastify";
+import { ConfirmationModal } from "../../components/Confirmation";
 interface BookData {
   id: string;
   title: string;
@@ -39,7 +42,7 @@ const UserBookPage = () => {
   const [totalItems, setTotalItems] = useState(0);
   // State for selected rows
   const [selectedBooks, setSelectedBooks] = useState<BookData[]>([]);
-
+  const [isConfirmationOpen, setIsConfirmationOpen] = useState(false);
   // Status component
   const StatusIndicator = ({ available }: { available: number }) => {
     const getStatusColor = () => {
@@ -81,9 +84,14 @@ const UserBookPage = () => {
   }, []);
 
   // Bulk action handlers
-  const handleBorrowBook = async (books: BookData[]) => {
-    const bookIds = books.map((book) => book.id);
-    await addBorrowing(bookIds);
+  const handleBorrowBook = async () => {
+    try {
+      const bookIds = selectedBooks.map((book) => book.id);
+      await addBorrowing(bookIds);
+      toast.success("Books borrowed successfully!");
+    } catch (error) {
+      handleAxiosError(error);
+    }
   };
   const handleFilterChange = (
     e: React.ChangeEvent<
@@ -173,13 +181,21 @@ const UserBookPage = () => {
               {
                 label: `Borrow Books ${selectedBooks.length}/5`,
                 icon: <Archive className="h-4 w-4" />,
-                onClick: handleBorrowBook,
+                onClick: () => setIsConfirmationOpen(true),
                 className: "bg-gray-700 text-gray-300 hover:bg-gray-600",
               },
             ]}
           />
         </div>
       </div>
+      <ConfirmationModal
+        isOpen={isConfirmationOpen}
+        onClose={() => setIsConfirmationOpen(false)}
+        onConfirm={async () => handleBorrowBook()}
+        description={`Are you sure you want to delete the category \n"${selectedBooks
+          .map((book) => book.title)
+          .join("\n")}"?`}
+      />
     </div>
   );
 };

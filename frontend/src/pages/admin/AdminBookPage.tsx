@@ -9,10 +9,14 @@ import {
   editBook,
   getBookPagination,
 } from "../../services/bookService";
-import { BookForm } from "../../components/BookForm";
+import { BookForm } from "./BookForm";
 import CustomModal from "../../components/CustomModal";
 import { toast } from "react-toastify";
 import { DeleteConfirmationModal } from "../../components/DeleteConfimation";
+import InputCustom from "../../components/InputCustom";
+import { getCategories } from "../../services/categoryService";
+import { handleAxiosError } from "../../utils/handleError";
+import { Category } from "../../interface/categoryInterface";
 // import {BookData} from "../../interface/bookInterface";
 interface BookData {
   id: string;
@@ -24,6 +28,7 @@ interface BookData {
 }
 const AdminBookPage = () => {
   const [isLoading, setLoading] = useState(false);
+  const [categories, setCategories] = useState<Category[]>([]);
   // State for managing data (for demonstration of actions)
   const [bookData, setBookData] = useState<BookData[]>([]);
   const [filterParameters, setFilterParameters] = useState<BookFilterParam>({
@@ -97,6 +102,14 @@ const AdminBookPage = () => {
     };
     fetchData();
   }, [filterParameters, pageSize, pageIndex]);
+  useEffect(() => {
+    const fetchCategories = async () => {
+      // Fetch categories from your API or service
+      const categoryData = await getCategories(); // Replace with your API call
+      setCategories([{ id: "", name: "All" }, ...categoryData]);
+    };
+    fetchCategories();
+  }, []);
 
   // Bulk action handlers
   const handleBorrowBook = (books: BookData[]) => {
@@ -117,7 +130,7 @@ const AdminBookPage = () => {
       setIsSubmitting(false);
     } catch (error: any) {
       setIsSubmitting(false);
-      toast.error("Error adding book. Please try again.", error.message);
+      handleAxiosError(error);
     }
   };
   const handleSubmitAddEditBook = async (book: FormData) => {
@@ -155,7 +168,7 @@ const AdminBookPage = () => {
       setIsSubmitting(false);
     } catch (error: any) {
       setIsSubmitting(false);
-      toast.error("Error editing book. Please try again.", error.message);
+      handleAxiosError(error);
     }
   };
   const handleDeleteBook = async (book: BookData) => {
@@ -178,24 +191,57 @@ const AdminBookPage = () => {
     } catch (error: any) {
       setIsConfirmationOpen(false);
       console.log(error);
-      toast.error(error.response.data.error);
+      handleAxiosError(error);
     }
   };
-  useEffect(() => {
-    console.log(selectedBooks);
-  }, [selectedBooks]);
+
+  const handleFilterChange = (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
+  ) => {
+    const { name, value } = e.target;
+    setFilterParameters((prev) => ({ ...prev, [name]: value }));
+  };
   return (
     <div className="p-6">
       <div className="flex items-center justify-between mb-6">
         <h1 className="text-2xl font-bold  text-gray-300 ">Books Table</h1>
-        <button
-          className={`px-3 py-1 text-lg rounded-md flex items-center 
+        <div className="flex space-x-4">
+          <InputCustom
+            name="query"
+            type="text"
+            value={filterParameters.query}
+            onChange={handleFilterChange}
+            placeholder="Enter title of the book"
+          ></InputCustom>
+          <InputCustom
+            type="select"
+            value={filterParameters.categoryId}
+            onChange={handleFilterChange}
+            name="categoryId"
+            optionList={categories}
+          ></InputCustom>
+          <InputCustom
+            type="select"
+            value={filterParameters.available}
+            onChange={handleFilterChange}
+            name="available"
+            optionList={[
+              { id: "", name: "All" },
+              { id: "true", name: "Available" },
+              { id: " false", name: "Not Available" },
+            ]}
+          ></InputCustom>
+          <button
+            className={`px-3 py-1 text-lg rounded-md flex items-center 
           bg-gray-700 text-gray-300 hover:bg-gray-600 border border-gray-600 transition-colors
         `}
-          onClick={handleAddBook}
-        >
-          Add Book
-        </button>
+            onClick={handleAddBook}
+          >
+            Add Book
+          </button>
+        </div>
       </div>
 
       <div className="space-y-10">
@@ -289,6 +335,7 @@ const AdminBookPage = () => {
         isOpen={isConfirmationOpen}
         onClose={() => setIsConfirmationOpen(false)}
         onConfirm={async () => handleDeleteConfirmation()}
+        description={`Are you sure you want to delete the category "${bookToDelete.title}"?`}
       />
     </div>
   );
