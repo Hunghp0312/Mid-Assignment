@@ -15,6 +15,7 @@ const AppRouter = () => {
     { path: "*", element: <NotFound /> },
     { path: "/forbidden", element: <Forbidden /> },
     { path: "/login", element: <Login /> },
+    { path: "/", element: <Login /> },
     { path: "/register", element: <Register /> },
     {
       path: "/admin",

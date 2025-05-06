@@ -2838,11 +2838,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\NashTech\\Mid-Assignment\\backend\\BLL\\BLL.csproj",
+      "projectUniqueName": "D:\\TestGit\\Mid-Assignment\\backend\\BLL\\BLL.csproj",
       "projectName": "BLL",
-      "projectPath": "D:\\NashTech\\Mid-Assignment\\backend\\BLL\\BLL.csproj",
+      "projectPath": "D:\\TestGit\\Mid-Assignment\\backend\\BLL\\BLL.csproj",
       "packagesPath": "C:\\Users\\ADMIN\\.nuget\\packages\\",
-      "outputPath": "D:\\NashTech\\Mid-Assignment\\backend\\BLL\\obj\\",
+      "outputPath": "D:\\TestGit\\Mid-Assignment\\backend\\BLL\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -2863,11 +2863,11 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "D:\\NashTech\\Mid-Assignment\\backend\\DAL\\DAL.csproj": {
-              "projectPath": "D:\\NashTech\\Mid-Assignment\\backend\\DAL\\DAL.csproj"
+            "D:\\TestGit\\Mid-Assignment\\backend\\DAL\\DAL.csproj": {
+              "projectPath": "D:\\TestGit\\Mid-Assignment\\backend\\DAL\\DAL.csproj"
             },
-            "D:\\NashTech\\Mid-Assignment\\backend\\Utilities\\Common.csproj": {
-              "projectPath": "D:\\NashTech\\Mid-Assignment\\backend\\Utilities\\Common.csproj"
+            "D:\\TestGit\\Mid-Assignment\\backend\\Utilities\\Common.csproj": {
+              "projectPath": "D:\\TestGit\\Mid-Assignment\\backend\\Utilities\\Common.csproj"
             }
           }
         }

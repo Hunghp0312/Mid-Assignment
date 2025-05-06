@@ -10,3 +10,15 @@ D:\NashTech\Mid-Assignment\backend\Utilities\obj\Debug\net8.0\Common.dll
 D:\NashTech\Mid-Assignment\backend\Utilities\obj\Debug\net8.0\refint\Common.dll
 D:\NashTech\Mid-Assignment\backend\Utilities\obj\Debug\net8.0\Common.pdb
 D:\NashTech\Mid-Assignment\backend\Utilities\obj\Debug\net8.0\ref\Common.dll
+D:\TestGit\Mid-Assignment\backend\Utilities\bin\Debug\net8.0\Common.deps.json
+D:\TestGit\Mid-Assignment\backend\Utilities\bin\Debug\net8.0\Common.dll
+D:\TestGit\Mid-Assignment\backend\Utilities\bin\Debug\net8.0\Common.pdb
+D:\TestGit\Mid-Assignment\backend\Utilities\obj\Debug\net8.0\Common.GeneratedMSBuildEditorConfig.editorconfig
+D:\TestGit\Mid-Assignment\backend\Utilities\obj\Debug\net8.0\Common.AssemblyInfoInputs.cache
+D:\TestGit\Mid-Assignment\backend\Utilities\obj\Debug\net8.0\Common.AssemblyInfo.cs
+D:\TestGit\Mid-Assignment\backend\Utilities\obj\Debug\net8.0\Common.csproj.CoreCompileInputs.cache
+D:\TestGit\Mid-Assignment\backend\Utilities\obj\Debug\net8.0\Common.sourcelink.json
+D:\TestGit\Mid-Assignment\backend\Utilities\obj\Debug\net8.0\Common.dll
+D:\TestGit\Mid-Assignment\backend\Utilities\obj\Debug\net8.0\refint\Common.dll
+D:\TestGit\Mid-Assignment\backend\Utilities\obj\Debug\net8.0\Common.pdb
+D:\TestGit\Mid-Assignment\backend\Utilities\obj\Debug\net8.0\ref\Common.dll

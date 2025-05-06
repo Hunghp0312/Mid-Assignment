@@ -43,19 +43,16 @@ public class TokenService : ITokenService
     public ClaimsPrincipal GetPrincipalFromExpiredToken(string token)
     {
         var secretKey = _configuration["JwtSettings:SecretKey"] ?? "Hungprono1caobangcittisthepasskey@123";
-        //if(secretKey.Split(' ').Length != 3)
-        //{
-        //    throw new SecurityTokenException("Invalid token");
-        //}
+
         var tokenValidationParameters = new TokenValidationParameters
         {
             ValidateIssuer = false,
             ValidateAudience = false,
             ValidateIssuerSigningKey = true,
             IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey)),
-            ClockSkew = TimeSpan.Zero, // Disable the default 5-minute delay
-            RoleClaimType = ClaimTypes.Role, // 👈 Tell it "which claim represents role"
-            ValidateLifetime = false, // We want to validate the token even if it's expired
+            ClockSkew = TimeSpan.Zero, 
+            RoleClaimType = ClaimTypes.Role, 
+            ValidateLifetime = false, 
         };
         var tokenHandler = new JwtSecurityTokenHandler();
         SecurityToken securityToken;

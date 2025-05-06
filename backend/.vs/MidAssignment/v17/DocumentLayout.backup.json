@@ -3,6 +3,14 @@
   "WorkspaceRootPath": "D:\\NashTech\\Mid-Assignment\\backend\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{5B316FF8-9CA8-4563-AF66-75C8C6ABADF8}|BLL\\BLL.csproj|d:\\nashtech\\mid-assignment\\backend\\bll\\services\\implementations\\bookborrowingrequestservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5B316FF8-9CA8-4563-AF66-75C8C6ABADF8}|BLL\\BLL.csproj|solutionrelative:bll\\services\\implementations\\bookborrowingrequestservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5B316FF8-9CA8-4563-AF66-75C8C6ABADF8}|BLL\\BLL.csproj|d:\\nashtech\\mid-assignment\\backend\\bll\\services\\implementations\\bookservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5B316FF8-9CA8-4563-AF66-75C8C6ABADF8}|BLL\\BLL.csproj|solutionrelative:bll\\services\\implementations\\bookservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{5B316FF8-9CA8-4563-AF66-75C8C6ABADF8}|BLL\\BLL.csproj|d:\\nashtech\\mid-assignment\\backend\\bll\\services\\interfaces\\ibookborrowingrequestservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{5B316FF8-9CA8-4563-AF66-75C8C6ABADF8}|BLL\\BLL.csproj|solutionrelative:bll\\services\\interfaces\\ibookborrowingrequestservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -17,10 +25,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{708BAB9F-7B5F-4AF2-AF43-F219E52BA6F6}|UnitTest\\UnitTest.csproj|d:\\nashtech\\mid-assignment\\backend\\unittest\\controller\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{708BAB9F-7B5F-4AF2-AF43-F219E52BA6F6}|UnitTest\\UnitTest.csproj|solutionrelative:unittest\\controller\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5B316FF8-9CA8-4563-AF66-75C8C6ABADF8}|BLL\\BLL.csproj|d:\\nashtech\\mid-assignment\\backend\\bll\\services\\implementations\\bookborrowingrequestservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5B316FF8-9CA8-4563-AF66-75C8C6ABADF8}|BLL\\BLL.csproj|solutionrelative:bll\\services\\implementations\\bookborrowingrequestservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{1FB6DBBD-7AF1-4B47-BF69-410CCF9E2612}|DAL\\DAL.csproj|d:\\nashtech\\mid-assignment\\backend\\dal\\repositories\\implementations\\bookborrowingrequestrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -169,10 +173,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{90104AAD-0E41-4225-B0A3-6E9DE759D6A5}|Presentation\\Presentation.csproj|d:\\nashtech\\mid-assignment\\backend\\presentation\\controllers\\categoriescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{90104AAD-0E41-4225-B0A3-6E9DE759D6A5}|Presentation\\Presentation.csproj|solutionrelative:presentation\\controllers\\categoriescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5B316FF8-9CA8-4563-AF66-75C8C6ABADF8}|BLL\\BLL.csproj|d:\\nashtech\\mid-assignment\\backend\\bll\\services\\implementations\\bookservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5B316FF8-9CA8-4563-AF66-75C8C6ABADF8}|BLL\\BLL.csproj|solutionrelative:bll\\services\\implementations\\bookservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{CC0E2E68-9062-4AB3-BDE4-B8F6A025504B}|Utilities\\Common.csproj|d:\\nashtech\\mid-assignment\\backend\\utilities\\common.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
@@ -366,7 +366,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 331,
-          "SelectedChildIndex": 7,
+          "SelectedChildIndex": 8,
           "Children": [
             {
               "$type": "Bookmark",
@@ -378,33 +378,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "BookBorrowingRequestService.cs",
-              "DocumentMoniker": "D:\\NashTech\\Mid-Assignment\\backend\\BLL\\Services\\Implementations\\BookBorrowingRequestService.cs",
-              "RelativeDocumentMoniker": "BLL\\Services\\Implementations\\BookBorrowingRequestService.cs",
-              "ToolTip": "D:\\NashTech\\Mid-Assignment\\backend\\BLL\\Services\\Implementations\\BookBorrowingRequestService.cs",
-              "RelativeToolTip": "BLL\\Services\\Implementations\\BookBorrowingRequestService.cs",
-              "ViewState": "AgIAABYAAAAAAAAAAAAgwCYAAABfAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-24T12:08:33.416Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 5,
-              "Title": "BookBorrowingRequestRepository.cs",
-              "DocumentMoniker": "D:\\NashTech\\Mid-Assignment\\backend\\DAL\\Repositories\\Implementations\\BookBorrowingRequestRepository.cs",
-              "RelativeDocumentMoniker": "DAL\\Repositories\\Implementations\\BookBorrowingRequestRepository.cs",
-              "ToolTip": "D:\\NashTech\\Mid-Assignment\\backend\\DAL\\Repositories\\Implementations\\BookBorrowingRequestRepository.cs",
-              "RelativeToolTip": "DAL\\Repositories\\Implementations\\BookBorrowingRequestRepository.cs",
-              "ViewState": "AgIAAAIAAAAAAAAAAAAswDEAAABgAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-24T11:51:15.747Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
               "Title": "UsersController.cs",
               "DocumentMoniker": "D:\\NashTech\\Mid-Assignment\\backend\\UnitTest\\Controller\\UsersController.cs",
               "RelativeDocumentMoniker": "UnitTest\\Controller\\UsersController.cs",
@@ -417,7 +391,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 4,
               "Title": "BookBorrowingRequestController.cs",
               "DocumentMoniker": "D:\\NashTech\\Mid-Assignment\\backend\\UnitTest\\Controller\\BookBorrowingRequestController.cs",
               "RelativeDocumentMoniker": "UnitTest\\Controller\\BookBorrowingRequestController.cs",
@@ -430,7 +404,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 3,
               "Title": "BookBorrowingRequestController.cs",
               "DocumentMoniker": "D:\\NashTech\\Mid-Assignment\\backend\\Presentation\\Controllers\\BookBorrowingRequestController.cs",
               "RelativeDocumentMoniker": "Presentation\\Controllers\\BookBorrowingRequestController.cs",
@@ -443,7 +417,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 2,
               "Title": "IBookBorrowingRequestService.cs",
               "DocumentMoniker": "D:\\NashTech\\Mid-Assignment\\backend\\BLL\\Services\\Interfaces\\IBookBorrowingRequestService.cs",
               "RelativeDocumentMoniker": "BLL\\Services\\Interfaces\\IBookBorrowingRequestService.cs",
@@ -456,7 +430,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 7,
               "Title": "AuthenticateService.cs",
               "DocumentMoniker": "D:\\NashTech\\Mid-Assignment\\backend\\BLL\\Services\\Implementations\\AuthenticateService.cs",
               "RelativeDocumentMoniker": "BLL\\Services\\Implementations\\AuthenticateService.cs",
@@ -469,7 +443,46 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 1,
+              "Title": "BookService.cs",
+              "DocumentMoniker": "D:\\NashTech\\Mid-Assignment\\backend\\BLL\\Services\\Implementations\\BookService.cs",
+              "RelativeDocumentMoniker": "BLL\\Services\\Implementations\\BookService.cs",
+              "ToolTip": "D:\\NashTech\\Mid-Assignment\\backend\\BLL\\Services\\Implementations\\BookService.cs",
+              "RelativeToolTip": "BLL\\Services\\Implementations\\BookService.cs",
+              "ViewState": "AgIAADIAAAAAAAAAAAAcwD8AAAApAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-24T12:08:52.389Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "BookBorrowingRequestService.cs",
+              "DocumentMoniker": "D:\\NashTech\\Mid-Assignment\\backend\\BLL\\Services\\Implementations\\BookBorrowingRequestService.cs",
+              "RelativeDocumentMoniker": "BLL\\Services\\Implementations\\BookBorrowingRequestService.cs",
+              "ToolTip": "D:\\NashTech\\Mid-Assignment\\backend\\BLL\\Services\\Implementations\\BookBorrowingRequestService.cs",
+              "RelativeToolTip": "BLL\\Services\\Implementations\\BookBorrowingRequestService.cs",
+              "ViewState": "AgIAABYAAAAAAAAAAAAgwC4AAAARAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-24T12:08:33.416Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "BookBorrowingRequestRepository.cs",
+              "DocumentMoniker": "D:\\NashTech\\Mid-Assignment\\backend\\DAL\\Repositories\\Implementations\\BookBorrowingRequestRepository.cs",
+              "RelativeDocumentMoniker": "DAL\\Repositories\\Implementations\\BookBorrowingRequestRepository.cs",
+              "ToolTip": "D:\\NashTech\\Mid-Assignment\\backend\\DAL\\Repositories\\Implementations\\BookBorrowingRequestRepository.cs",
+              "RelativeToolTip": "DAL\\Repositories\\Implementations\\BookBorrowingRequestRepository.cs",
+              "ViewState": "AgIAAAIAAAAAAAAAAAAswDEAAABgAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-24T11:51:15.747Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
               "Title": "AuthController.cs",
               "DocumentMoniker": "D:\\NashTech\\Mid-Assignment\\backend\\Presentation\\Controllers\\AuthController.cs",
               "RelativeDocumentMoniker": "Presentation\\Controllers\\AuthController.cs",
@@ -482,7 +495,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 9,
               "Title": "UserService.cs",
               "DocumentMoniker": "D:\\NashTech\\Mid-Assignment\\backend\\BLL\\Services\\Implementations\\UserService.cs",
               "RelativeDocumentMoniker": "BLL\\Services\\Implementations\\UserService.cs",
@@ -495,7 +508,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 10,
               "Title": "BookBorrowingRequestDetailResponseDTO.cs",
               "DocumentMoniker": "D:\\NashTech\\Mid-Assignment\\backend\\BLL\\DTOs\\BookBorrowingRequestDetailDTO\\BookBorrowingRequestDetailResponseDTO.cs",
               "RelativeDocumentMoniker": "BLL\\DTOs\\BookBorrowingRequestDetailDTO\\BookBorrowingRequestDetailResponseDTO.cs",
@@ -508,7 +521,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 11,
               "Title": "RegisterRequestDTO.cs",
               "DocumentMoniker": "D:\\NashTech\\Mid-Assignment\\backend\\BLL\\DTOs\\AuthenticateDTO\\RegisterRequestDTO.cs",
               "RelativeDocumentMoniker": "BLL\\DTOs\\AuthenticateDTO\\RegisterRequestDTO.cs",
@@ -521,7 +534,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 12,
               "Title": "RefreshRequestDTO.cs",
               "DocumentMoniker": "D:\\NashTech\\Mid-Assignment\\backend\\BLL\\DTOs\\AuthenticateDTO\\RefreshRequestDTO.cs",
               "RelativeDocumentMoniker": "BLL\\DTOs\\AuthenticateDTO\\RefreshRequestDTO.cs",
@@ -533,7 +546,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 13,
               "Title": "LoginRequestDTO.cs",
               "DocumentMoniker": "D:\\NashTech\\Mid-Assignment\\backend\\BLL\\DTOs\\AuthenticateDTO\\LoginRequestDTO.cs",
               "RelativeDocumentMoniker": "BLL\\DTOs\\AuthenticateDTO\\LoginRequestDTO.cs",
@@ -545,7 +558,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 16,
               "Title": "BookConfiguration.cs",
               "DocumentMoniker": "D:\\NashTech\\Mid-Assignment\\backend\\DAL\\EntityConfiguration\\BookConfiguration.cs",
               "RelativeDocumentMoniker": "DAL\\EntityConfiguration\\BookConfiguration.cs",
@@ -557,7 +570,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 15,
               "Title": "CategoryConfiguration.cs",
               "DocumentMoniker": "D:\\NashTech\\Mid-Assignment\\backend\\DAL\\EntityConfiguration\\CategoryConfiguration.cs",
               "RelativeDocumentMoniker": "DAL\\EntityConfiguration\\CategoryConfiguration.cs",
@@ -569,7 +582,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 17,
               "Title": "BookCreateDTO.cs",
               "DocumentMoniker": "D:\\NashTech\\Mid-Assignment\\backend\\BLL\\DTOs\\BookDTO\\BookCreateDTO.cs",
               "RelativeDocumentMoniker": "BLL\\DTOs\\BookDTO\\BookCreateDTO.cs",
@@ -581,7 +594,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 14,
               "Title": "CategoryRequestDTO.cs",
               "DocumentMoniker": "D:\\NashTech\\Mid-Assignment\\backend\\BLL\\DTOs\\CategoryDTO\\CategoryRequestDTO.cs",
               "RelativeDocumentMoniker": "BLL\\DTOs\\CategoryDTO\\CategoryRequestDTO.cs",
@@ -593,7 +606,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 18,
               "Title": "UserRequestDTO.cs",
               "DocumentMoniker": "D:\\NashTech\\Mid-Assignment\\backend\\BLL\\DTOs\\UserDTO\\UserRequestDTO.cs",
               "RelativeDocumentMoniker": "BLL\\DTOs\\UserDTO\\UserRequestDTO.cs",
@@ -605,7 +618,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 19,
               "Title": "BookUpdateDTO.cs",
               "DocumentMoniker": "D:\\NashTech\\Mid-Assignment\\backend\\BLL\\DTOs\\BookDTO\\BookUpdateDTO.cs",
               "RelativeDocumentMoniker": "BLL\\DTOs\\BookDTO\\BookUpdateDTO.cs",
@@ -617,7 +630,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 20,
               "Title": "TokenResponseDTO.cs",
               "DocumentMoniker": "D:\\NashTech\\Mid-Assignment\\backend\\BLL\\DTOs\\AuthenticateDTO\\TokenResponseDTO.cs",
               "RelativeDocumentMoniker": "BLL\\DTOs\\AuthenticateDTO\\TokenResponseDTO.cs",
@@ -629,7 +642,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 20,
+              "DocumentIndex": 21,
               "Title": "UserConfiguration.cs",
               "DocumentMoniker": "D:\\NashTech\\Mid-Assignment\\backend\\DAL\\EntityConfiguration\\UserConfiguration.cs",
               "RelativeDocumentMoniker": "DAL\\EntityConfiguration\\UserConfiguration.cs",
@@ -641,7 +654,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 21,
+              "DocumentIndex": 22,
               "Title": "User.cs",
               "DocumentMoniker": "D:\\NashTech\\Mid-Assignment\\backend\\DAL\\Entity\\User.cs",
               "RelativeDocumentMoniker": "DAL\\Entity\\User.cs",
@@ -653,7 +666,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 22,
+              "DocumentIndex": 23,
               "Title": "ICategoryService.cs",
               "DocumentMoniker": "D:\\NashTech\\Mid-Assignment\\backend\\BLL\\Services\\Interfaces\\ICategoryService.cs",
               "RelativeDocumentMoniker": "BLL\\Services\\Interfaces\\ICategoryService.cs",
@@ -665,7 +678,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 23,
+              "DocumentIndex": 24,
               "Title": "IUserService.cs",
               "DocumentMoniker": "D:\\NashTech\\Mid-Assignment\\backend\\BLL\\Services\\Interfaces\\IUserService.cs",
               "RelativeDocumentMoniker": "BLL\\Services\\Interfaces\\IUserService.cs",
@@ -677,7 +690,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 24,
+              "DocumentIndex": 25,
               "Title": "ITokenService.cs",
               "DocumentMoniker": "D:\\NashTech\\Mid-Assignment\\backend\\BLL\\Services\\Interfaces\\ITokenService.cs",
               "RelativeDocumentMoniker": "BLL\\Services\\Interfaces\\ITokenService.cs",
@@ -689,7 +702,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 25,
+              "DocumentIndex": 26,
               "Title": "BookBorrowingRequestDetailRepository.cs",
               "DocumentMoniker": "D:\\NashTech\\Mid-Assignment\\backend\\DAL\\Repositories\\Implementations\\BookBorrowingRequestDetailRepository.cs",
               "RelativeDocumentMoniker": "DAL\\Repositories\\Implementations\\BookBorrowingRequestDetailRepository.cs",
@@ -701,7 +714,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 26,
+              "DocumentIndex": 27,
               "Title": "BookRepository.cs",
               "DocumentMoniker": "D:\\NashTech\\Mid-Assignment\\backend\\DAL\\Repositories\\Implementations\\BookRepository.cs",
               "RelativeDocumentMoniker": "DAL\\Repositories\\Implementations\\BookRepository.cs",
@@ -713,7 +726,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 27,
+              "DocumentIndex": 28,
               "Title": "CategoryRepository.cs",
               "DocumentMoniker": "D:\\NashTech\\Mid-Assignment\\backend\\DAL\\Repositories\\Implementations\\CategoryRepository.cs",
               "RelativeDocumentMoniker": "DAL\\Repositories\\Implementations\\CategoryRepository.cs",
@@ -725,7 +738,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 28,
+              "DocumentIndex": 29,
               "Title": "AuthControllerTest.cs",
               "DocumentMoniker": "D:\\NashTech\\Mid-Assignment\\backend\\UnitTest\\Controller\\AuthControllerTest.cs",
               "RelativeDocumentMoniker": "UnitTest\\Controller\\AuthControllerTest.cs",
@@ -737,7 +750,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 29,
+              "DocumentIndex": 30,
               "Title": "BooksController.cs",
               "DocumentMoniker": "D:\\NashTech\\Mid-Assignment\\backend\\UnitTest\\Controller\\BooksController.cs",
               "RelativeDocumentMoniker": "UnitTest\\Controller\\BooksController.cs",
@@ -749,7 +762,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 30,
+              "DocumentIndex": 31,
               "Title": "RegisterResponseDTO.cs",
               "DocumentMoniker": "D:\\NashTech\\Mid-Assignment\\backend\\BLL\\DTOs\\AuthenticateDTO\\RegisterResponseDTO.cs",
               "RelativeDocumentMoniker": "BLL\\DTOs\\AuthenticateDTO\\RegisterResponseDTO.cs",
@@ -761,7 +774,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 31,
+              "DocumentIndex": 32,
               "Title": "BookBorrowingRequestRequestDTO.cs",
               "DocumentMoniker": "D:\\NashTech\\Mid-Assignment\\backend\\BLL\\DTOs\\BookBorrowingRequestDTO\\BookBorrowingRequestRequestDTO.cs",
               "RelativeDocumentMoniker": "BLL\\DTOs\\BookBorrowingRequestDTO\\BookBorrowingRequestRequestDTO.cs",
@@ -773,7 +786,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 32,
+              "DocumentIndex": 33,
               "Title": "UserServiceTest.cs",
               "DocumentMoniker": "D:\\NashTech\\Mid-Assignment\\backend\\UnitTest\\Service\\UserServiceTest.cs",
               "RelativeDocumentMoniker": "UnitTest\\Service\\UserServiceTest.cs",
@@ -785,7 +798,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 33,
+              "DocumentIndex": 34,
               "Title": "CategoryServiceTest.cs",
               "DocumentMoniker": "D:\\NashTech\\Mid-Assignment\\backend\\UnitTest\\Service\\CategoryServiceTest.cs",
               "RelativeDocumentMoniker": "UnitTest\\Service\\CategoryServiceTest.cs",
@@ -797,7 +810,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 34,
+              "DocumentIndex": 35,
               "Title": "UsersController.cs",
               "DocumentMoniker": "D:\\NashTech\\Mid-Assignment\\backend\\Presentation\\Controllers\\UsersController.cs",
               "RelativeDocumentMoniker": "Presentation\\Controllers\\UsersController.cs",
@@ -809,7 +822,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 35,
+              "DocumentIndex": 36,
               "Title": "TokenServiceTest.cs",
               "DocumentMoniker": "D:\\NashTech\\Mid-Assignment\\backend\\UnitTest\\Service\\TokenServiceTest.cs",
               "RelativeDocumentMoniker": "UnitTest\\Service\\TokenServiceTest.cs",
@@ -821,7 +834,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 36,
+              "DocumentIndex": 37,
               "Title": "AuthenticationServiceTest.cs",
               "DocumentMoniker": "D:\\NashTech\\Mid-Assignment\\backend\\UnitTest\\Service\\AuthenticationServiceTest.cs",
               "RelativeDocumentMoniker": "UnitTest\\Service\\AuthenticationServiceTest.cs",
@@ -833,7 +846,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 37,
+              "DocumentIndex": 38,
               "Title": "ExceptionMiddleware.cs",
               "DocumentMoniker": "D:\\NashTech\\Mid-Assignment\\backend\\Presentation\\Middleware\\ExceptionMiddleware.cs",
               "RelativeDocumentMoniker": "Presentation\\Middleware\\ExceptionMiddleware.cs",
@@ -845,7 +858,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 38,
+              "DocumentIndex": 39,
               "Title": "TokenService.cs",
               "DocumentMoniker": "D:\\NashTech\\Mid-Assignment\\backend\\BLL\\Services\\Implementations\\TokenService.cs",
               "RelativeDocumentMoniker": "BLL\\Services\\Implementations\\TokenService.cs",
@@ -857,7 +870,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 39,
+              "DocumentIndex": 40,
               "Title": "CategoryService.cs",
               "DocumentMoniker": "D:\\NashTech\\Mid-Assignment\\backend\\BLL\\Services\\Implementations\\CategoryService.cs",
               "RelativeDocumentMoniker": "BLL\\Services\\Implementations\\CategoryService.cs",
@@ -869,7 +882,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 40,
+              "DocumentIndex": 41,
               "Title": "BooksController.cs",
               "DocumentMoniker": "D:\\NashTech\\Mid-Assignment\\backend\\Presentation\\Controllers\\BooksController.cs",
               "RelativeDocumentMoniker": "Presentation\\Controllers\\BooksController.cs",
@@ -881,7 +894,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 41,
+              "DocumentIndex": 42,
               "Title": "CategoriesController.cs",
               "DocumentMoniker": "D:\\NashTech\\Mid-Assignment\\backend\\Presentation\\Controllers\\CategoriesController.cs",
               "RelativeDocumentMoniker": "Presentation\\Controllers\\CategoriesController.cs",
@@ -890,18 +903,6 @@
               "ViewState": "AgIAAAkAAAAAAAAAAAAAADsAAAAkAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-24T11:15:50.881Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 42,
-              "Title": "BookService.cs",
-              "DocumentMoniker": "D:\\NashTech\\Mid-Assignment\\backend\\BLL\\Services\\Implementations\\BookService.cs",
-              "RelativeDocumentMoniker": "BLL\\Services\\Implementations\\BookService.cs",
-              "ToolTip": "D:\\NashTech\\Mid-Assignment\\backend\\BLL\\Services\\Implementations\\BookService.cs",
-              "RelativeToolTip": "BLL\\Services\\Implementations\\BookService.cs",
-              "ViewState": "AgIAADIAAAAAAAAAAAAcwD8AAAApAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-24T12:08:52.389Z"
             },
             {
               "$type": "Document",
