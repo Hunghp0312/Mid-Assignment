@@ -3,7 +3,7 @@ import { BookRequestsList } from "../components/BookRequestList";
 const BookBorrowingPage = () => {
   return (
     <div className="p-6">
-      <h1 className="text-2xl font-bold mb-6">Book Requests</h1>
+      <h1 className="text-2xl font-bold mb-6 text-gray-300">Book Requests</h1>
       <BookRequestsList />
     </div>
   );

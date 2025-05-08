@@ -17,6 +17,7 @@ import InputCustom from "../../components/InputCustom";
 import { getCategories } from "../../services/categoryService";
 import { handleAxiosError } from "../../utils/handleError";
 import { Category } from "../../interface/categoryInterface";
+import useDebounce from "../../hooks/useDebounce";
 // import {BookData} from "../../interface/bookInterface";
 interface BookData {
   id: string;
@@ -32,10 +33,11 @@ const AdminBookPage = () => {
   // State for managing data (for demonstration of actions)
   const [bookData, setBookData] = useState<BookData[]>([]);
   const [filterParameters, setFilterParameters] = useState<BookFilterParam>({
-    query: "",
     categoryId: "",
     available: "",
   });
+  const [query, setQuery] = useState("");
+  const debouncedQuery = useDebounce(query, 1000);
   // const [paginationData, setPaginationData] = useState({
   //   totalItems: 0,
   //   pageSize: 10,
@@ -93,6 +95,7 @@ const AdminBookPage = () => {
       setLoading(true);
       const data = await getBookPagination(
         filterParameters,
+        debouncedQuery,
         pageIndex,
         pageSize
       );
@@ -101,7 +104,7 @@ const AdminBookPage = () => {
       setLoading(false);
     };
     fetchData();
-  }, [filterParameters, pageSize, pageIndex]);
+  }, [filterParameters, pageSize, pageIndex, debouncedQuery]);
   useEffect(() => {
     const fetchCategories = async () => {
       // Fetch categories from your API or service
@@ -177,7 +180,12 @@ const AdminBookPage = () => {
   };
   const getData = async () => {
     setLoading(true);
-    const data = await getBookPagination(filterParameters, pageIndex, pageSize);
+    const data = await getBookPagination(
+      filterParameters,
+      query,
+      pageIndex,
+      pageSize
+    );
     setBookData(data.items);
     setTotalItems(data.totalCount);
     setLoading(false);
@@ -203,6 +211,14 @@ const AdminBookPage = () => {
     const { name, value } = e.target;
     setFilterParameters((prev) => ({ ...prev, [name]: value }));
   };
+  const handleQueryChange = (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
+  ) => {
+    const { value } = e.target;
+    setQuery(value);
+  };
   return (
     <div className="p-6">
       <div className="flex items-center justify-between mb-6">
@@ -211,9 +227,9 @@ const AdminBookPage = () => {
           <InputCustom
             name="query"
             type="text"
-            value={filterParameters.query}
-            onChange={handleFilterChange}
-            placeholder="Enter title of the book"
+            value={query}
+            onChange={handleQueryChange}
+            placeholder="Search by title, author or category"
           ></InputCustom>
           <InputCustom
             type="select"

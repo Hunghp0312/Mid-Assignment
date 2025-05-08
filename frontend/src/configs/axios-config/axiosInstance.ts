@@ -1,13 +1,25 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import axios from "axios";
 import { navigate } from "../../utils/navigateHelper";
 const axiosInstance = axios.create({
   baseURL: "https://localhost:7051/api", // Replace with your API base URL
   timeout: 10000, // Set a timeout for requests (in milliseconds)
-  headers: {
-    "Content-Type": "application/json",
-    Accept: "application/json",
-  },
 });
+
+let isRefreshing = false;
+let failedQueue: any = [];
+
+const processQueue = (error: any, token = null) => {
+  failedQueue.forEach((prom: any) => {
+    if (error) {
+      prom.reject(error);
+    } else {
+      prom.resolve(token);
+    }
+  });
+
+  failedQueue = [];
+};
 axiosInstance.interceptors.request.use(
   (config) => {
     // Add any custom logic before sending the request
@@ -33,6 +45,17 @@ axiosInstance.interceptors.response.use(
     // Handle response error
     const originalRequest = error.config;
     if (error.response.status === 401 && !originalRequest._retry) {
+      if (isRefreshing) {
+        return new Promise(function (resolve, reject) {
+          failedQueue.push({ resolve, reject });
+        })
+          .then((token) => {
+            originalRequest.headers["Authorization"] = "Bearer " + token;
+            return axios(originalRequest);
+          })
+          .catch((err) => Promise.reject(err));
+      }
+      isRefreshing = true;
       originalRequest._retry = true; // Mark the request as retried to avoid infinite loops.
       try {
         const refreshToken = localStorage.getItem("refreshToken"); // Retrieve the stored refresh token.
@@ -52,14 +75,18 @@ axiosInstance.interceptors.response.use(
         axiosInstance.defaults.headers.common[
           "Authorization"
         ] = `Bearer ${newAccessToken}`;
+        processQueue(null, newAccessToken);
         return axiosInstance(originalRequest); // Retry the original request with the new access token.
       } catch (refreshError) {
         // Handle refresh token errors by clearing stored tokens and redirecting to the login page.
+        processQueue(refreshError, null);
         console.error("Token refresh failed:", refreshError);
         localStorage.removeItem("accessToken");
         localStorage.removeItem("refreshToken");
         navigate("/login");
         return Promise.reject(refreshError);
+      } finally {
+        isRefreshing = false;
       }
     }
     // if (error.response.status === 401) {

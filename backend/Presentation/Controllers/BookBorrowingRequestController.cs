@@ -1,6 +1,4 @@
-﻿using System.Security.Claims;
-using BLL.CustomException;
-using BLL.DTOs.BookBorrowingRequestDTO;
+﻿using BLL.DTOs.BookBorrowingRequestDTO;
 using BLL.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -20,7 +18,7 @@ public class BookBorrowingRequestController : ControllerBase
     [Authorize(Roles = "User")]
     public async Task<IActionResult> AddBookBorrowingRequest([FromBody] BookBorrowingRequestRequestDTO bookBorrowing)
     {
-        var requestorId = Guid.Parse(User.FindFirst("id")?.Value) ;
+        var requestorId = Guid.Parse(User.FindFirst("id")?.Value);
         await _bookBorrowingRequestService.AddBookBorrowingRequest(bookBorrowing, requestorId);
         return Ok();
     }
@@ -38,12 +36,14 @@ public class BookBorrowingRequestController : ControllerBase
     [Authorize(Roles = "SuperUser")]
     public async Task<IActionResult> RejectBookBorrowingRequest(Guid id)
     {
-        var approverId = Guid.Parse(User.FindFirst("id")?.Value) ;
+        var approverId = Guid.Parse(User.FindFirst("id")?.Value);
         await _bookBorrowingRequestService.RejectBookBorrowingRequest(approverId, id);
         return Ok();
     }
     [HttpGet]
-    public async Task<IActionResult> GetAllBookBorrowingRequests([FromQuery] int? pageIndex, [FromQuery] int? pageSize, [FromQuery]string? status)
+    [Authorize(Roles = "SuperUser")]
+
+    public async Task<IActionResult> GetAllBookBorrowingRequests([FromQuery] int? pageIndex, [FromQuery] int? pageSize, [FromQuery] string? status)
     {
         if (pageSize.HasValue && pageIndex.HasValue)
         {

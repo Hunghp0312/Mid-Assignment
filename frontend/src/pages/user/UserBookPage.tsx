@@ -9,6 +9,7 @@ import { getCategories } from "../../services/categoryService";
 import { handleAxiosError } from "../../utils/handleError";
 import { toast } from "react-toastify";
 import { ConfirmationModal } from "../../components/Confirmation";
+import useDebounce from "../../hooks/useDebounce";
 interface BookData {
   id: string;
   title: string;
@@ -24,10 +25,11 @@ interface Category {
 const UserBookPage = () => {
   const [isLoading, setLoading] = useState(false);
   const [filterParameters, setFilterParameters] = useState<BookFilterParam>({
-    query: "",
     categoryId: "",
     available: "",
   });
+  const [query, setQuery] = useState("");
+  const debouncedQuery = useDebounce(query, 1000);
   // State for managing data (for demonstration of actions)
   const [bookData, setBookData] = useState<BookData[]>([]);
   const [categories, setCategories] = useState<Category[]>([]);
@@ -66,6 +68,7 @@ const UserBookPage = () => {
       setLoading(true);
       const data = await getBookPagination(
         filterParameters,
+        debouncedQuery,
         pageIndex,
         pageSize
       );
@@ -74,7 +77,7 @@ const UserBookPage = () => {
       setLoading(false);
     };
     fetchData();
-  }, [filterParameters, pageSize, pageIndex]);
+  }, [filterParameters, pageSize, pageIndex, debouncedQuery]);
   useEffect(() => {
     const fetchCategory = async () => {
       const data = await getCategories();
@@ -101,6 +104,14 @@ const UserBookPage = () => {
     const { name, value } = e.target;
     setFilterParameters((prev) => ({ ...prev, [name]: value }));
   };
+  const handleQueryChange = (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
+  ) => {
+    const { value } = e.target;
+    setQuery(value);
+  };
   return (
     <div className="p-6">
       <h1 className="text-2xl font-bold mb-6 text-gray-300">Books Table</h1>
@@ -109,9 +120,9 @@ const UserBookPage = () => {
         <InputCustom
           name="query"
           type="text"
-          value={filterParameters.query}
-          onChange={handleFilterChange}
-          placeholder="Enter title of the book"
+          value={query}
+          onChange={handleQueryChange}
+          placeholder="Search by title, author or category"
         ></InputCustom>
         <InputCustom
           type="select"

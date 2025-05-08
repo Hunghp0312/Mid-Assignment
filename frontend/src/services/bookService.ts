@@ -1,18 +1,18 @@
 import axiosInstance from "../configs/axios-config/axiosInstance";
 
 export interface BookFilterParam {
-  query: string;
   categoryId: string;
   available: string;
 }
 export const getBookPagination = async (
   filterParam: BookFilterParam,
+  query: string,
   pageIndex: number,
   pageSize: number
 ) => {
   try {
     const response = await axiosInstance.get(
-      `/books?pageIndex=${pageIndex}&pageSize=${pageSize}&query=${filterParam.query}&categoryId=${filterParam.categoryId}&available=${filterParam.available}`
+      `/books?pageIndex=${pageIndex}&pageSize=${pageSize}&query=${query}&categoryId=${filterParam.categoryId}&available=${filterParam.available}`
     );
     return response.data;
   } catch (error) {

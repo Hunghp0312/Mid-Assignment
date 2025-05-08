@@ -160,7 +160,6 @@ export default function LoginPage() {
               </Link>
             </div>
           </form>
-          {JSON.stringify(formData)}
         </div>
       </div>
     </div>
